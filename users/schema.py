@@ -26,5 +26,12 @@ class CreateUser(graphene.Mutation):
         return CreateUser(user=user)
 
 
+class Query(graphene.ObjectType):
+    users = graphene.List(UserType)
+
+    def resolve_users(self, info):
+        return get_user_model().objects.all()
+
+
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()

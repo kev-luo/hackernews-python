@@ -25,6 +25,7 @@ class CreateLink(graphene.Mutation):
         link = Link(url=url, description=description)
         link.save()
 
+        # returns field by field
         return CreateLink(id=link.id, url=link.url, description=link.description)
 
 

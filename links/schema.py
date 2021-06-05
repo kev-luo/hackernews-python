@@ -10,6 +10,11 @@ class LinkType(DjangoObjectType):
         model = Link
 
 
+class VoteType(DjangoObjectType):
+    class Meta:
+        model = Vote
+
+
 # define mutation class
 class CreateLink(graphene.Mutation):
     id = graphene.Int()
@@ -55,9 +60,13 @@ class CreateVote(graphene.Mutation):
 
 class Query(graphene.ObjectType):
     links = graphene.List(LinkType)
+    votes = graphene.List(VoteType)
 
     def resolve_links(self, info, **kwargs):
         return Link.objects.all()
+
+    def resolve_votes(self, info, **kwargs):
+        return Vote.objects.all()
 
 
 # create a mutation class with a field to be resolved, which points to our mutation defined above

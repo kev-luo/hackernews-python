@@ -9,7 +9,6 @@ function App() {
       links {
         id
         url
-        description
       }
     }
   `;
